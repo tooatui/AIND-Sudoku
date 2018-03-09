@@ -62,7 +62,7 @@ def naked_twins(values):
             for box in boxes_to_eliminate:
                 # remove the digits 
                 for num in number_pair:
-                    values[box] = values[box].replace(num, '')
+                    values = assign_value(values, box, values[box].replace(num, ''))
     return values
 
 
@@ -86,7 +86,7 @@ def eliminate(values):
 
     for box in assigned_value_boxes:
         for peer in peers[box]:
-            values[peer] = values[peer].replace(values[box], '')
+            values = assign_value(values, peer, values[peer].replace(values[box], ''))
     return values
 
 
@@ -117,8 +117,7 @@ def only_choice(values):
 
             # assign the digit to the only cell that have the available value
             if len(cells_with_d) == 1:
-                values[cells_with_d[0]] = d
-
+                values = assign_value(values, cells_with_d[0], d)
     return values
 
 
